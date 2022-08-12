@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>html form</title>
+</head>
+<body>
+<div class="subscribe-container">
+  <form id="post" method="POST" onsubmit="sendPost();return false">
+    <input type="email" name="youremail" placeholder="Email Address" required>
+    <input type="password" name="yourname" placeholder="password" required>
+    <input class="subscribe-button" type="submit" value="Login">
+    <label id="lableForm">STserver</label>
+  </form>
+</div>
+<script>
+  const link = document.createElement('link');
+  link.href = document.location.origin + '/app.css';
+  link.rel = 'stylesheet';
+  document.getElementsByTagName('head')[0].appendChild(link);
+
+    function sendPost() {
+        let elements = document.getElementById("post").elements;
+        let obj ={};
+        for(let i = 0 ; i < elements.length ; i++){
+            let item = elements.item(i);
+            obj[item.name] = item.value;
+        }
+        fetch('/localhost:8000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Connection': 'keep-alive',
+                'Accept': '*',
+                data: JSON.stringify(obj)
+            },
+            body: JSON.stringify(obj),
+        })
+    }
+</script>
+</body>
+</html>
