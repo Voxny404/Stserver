@@ -6,15 +6,17 @@
          ██    ██         ██
     ███████    ██    ███████
 ````
+With STS, you can run multiple servers on the same terminal.
+It is easy to configure and does not require extra dependencies.
+
 ## How to init
 #### `const STserver = require('./src/STserver.js');`
 #### `const server = new STserver();`
-#### `server.int(PORT, handleIncomingData, routes)`
+#### `server.int(PORT, handleIncomingData, routes);`
 
 ### Server init function
-The server init takes in a port and a function that returnes incomming post requests and an object called routes.
-routes have 2 properties called 'url' and 'location'. The location is the location of the file stored on the server
-and the url is the given location in the browser.
+The server init function supports a port and a function which returns incoming post requests and an object named routes.
+Routes have two properties referred to as 'url' and 'location'.The location corresponds with the location of the file stored on the server.And the url is the place indicated in the browser.
 
 ### Routes object example.
 
