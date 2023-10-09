@@ -36,6 +36,13 @@ class Router {
             responseObject.type = 'json'
         }
 
+        if (element.type === 'js') {
+            responseObject.status = 200
+            responseObject.writeHead = { "Content-Type": "application/javascript" }
+            responseObject.write = await this.readHtml(element.location)
+            responseObject.type = 'js'
+        }
+
         if (element.type === 'bin') {
             responseObject.writeHead = { "Content-Type": "application/octet-stream" }
             responseObject.write = await this.readHtml(element.location)
