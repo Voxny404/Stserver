@@ -6,11 +6,33 @@ class STserver {
         this.port = null;
         this.paths = null;
     }
+    async getDirFiles (folderDir) {
+        return await new Promise(async res => 
+            fs.readdir(__dirname + folderDir, 'utf8', (err, files) => {
+                err ? console.log(err) : res(files)  
+            })
+        ) 
+    }
+
+    async setRoutesFolder(folderDir) {
+        return await new Promise(async res => {
+            const files = await this.getDirFiles(folderDir); 
+            if (!files) throw (folderDir + ' EMPTY DIRECTORY !');
+
+            for await (const filename of files)  {
+                const fileType = filename.split('.')[1] ? filename.split('.')[1] : '';
+                const filePath = { url: '/' + filename,   location: folderDir + '/' + filename, type: fileType }
+                this.paths.push(filePath);
+            }
+        
+            res(true);
+        });
+    }
 
     int(PORT, handleResponse, routes, isHttps) {
         let isHttp = 'http'
-        routes.port = PORT
-        this.paths = routes
+        if (routes) routes.port = PORT
+        if (routes) this.paths = routes
         this.port = PORT
         
         const router = new Router();

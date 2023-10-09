@@ -40,3 +40,11 @@ function handleIncomingData(data) {
 
 server.int(PORT, handleIncomingData, routes)
 //server2.int(3000, handleIncomingData, routes2)
+
+// (async () => {
+//     // serve a whole directory the directory needs to be in src folder!!!
+//     const folderDir = '/html'
+//     await server.setRoutesFolder(folderDir);
+
+//     server.int(PORT, handleIncomingData, routes = null);
+// })()
